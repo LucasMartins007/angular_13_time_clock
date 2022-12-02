@@ -7,12 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 
 import { AppRoutingModule } from './app-routing.module';
-import { LoginModule, LoginRoutingModule, CadastroPjModule } from './autenticacao';
+import { CadastroPjModule, LoginModule, LoginRoutingModule } from './autenticacao';
+import { CadastroPfModule, CadastroPfRoutingModule } from './autenticacao/cadastro-pf';
 import { CadastroPjRoutingModule } from './autenticacao/cadastro-pj/cadastro-pj-routing.module';
 
 /**
  * Módulo de routing raiz deve ser sempre o último na declaração no import
- * 
  */
 @NgModule({
   declarations: [
@@ -24,10 +24,12 @@ import { CadastroPjRoutingModule } from './autenticacao/cadastro-pj/cadastro-pj-
     BrowserAnimationsModule,
     MatButtonModule,
     LoginModule,
-    CadastroPjModule,
-    
     LoginRoutingModule,
+    CadastroPjModule,
     CadastroPjRoutingModule,
+    CadastroPfModule,
+    CadastroPfRoutingModule,
+    
     AppRoutingModule
   ],
   providers: [],
