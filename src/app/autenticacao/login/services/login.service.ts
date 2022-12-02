@@ -6,7 +6,9 @@ import { environment as env} from '../../../../environments/enviroment';
 
 import { Login } from '../';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LoginService {
 
   private readonly PATH: string = 'auth';
