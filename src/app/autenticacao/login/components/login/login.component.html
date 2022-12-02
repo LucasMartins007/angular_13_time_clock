@@ -1,0 +1,29 @@
+<div [ngStyle]="{'text-align': 'center', 'position': 'absolute', 'width': '100%'}">
+    <form [formGroup]="form" fxLayoutAlign="center" [ngStyle]="{'display': 'inline-block', 'position': 'relative'}" novalidate>
+        <mat-list>
+            <mat-list-item>
+                <mat-form-field>
+                    <input matInput placeholder="Email" formControlName="email">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+                <mat-form-field>
+                    <input matInput placeholder="Senha" formControlName="senha">
+                </mat-form-field>
+            </mat-list-item>
+            <mat-list-item fxLayoutAlign="center">
+                <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="logar()">
+                    Entrar
+                </button>
+            </mat-list-item>
+            <mat-list-item>
+                <a mat-button color="primary" routerLink="/cadastro-pf">
+                    Cadastrar PF
+                </a>
+                <a mat-button color="primary" routerLink="/cadastro-pj">
+                    Cadastrar PJ
+                </a>
+            </mat-list-item>
+        </mat-list>
+    </form>
+</div>
