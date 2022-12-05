@@ -33,36 +33,36 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  logar() {
+  logar(): void {
     if (this.form.invalid) {
-      console.log("Formulário inválido.");
+      alert("Formulário inválido.");
       return;
     }
     const login: Login = this.form.value;
     this.loginService.logar(login)
       .subscribe({
-        next: (data) => {
-          console.log(JSON.stringify(data));
-          localStorage['token'] = data['data']['token'];
-          const usuarioData = JSON.parse(atob(data['data']['token'].split('.')[1]));
-
-          console.log(JSON.stringify(usuarioData));
-          if (usuarioData['role'] == 'ROLE_ADMIN') {
-            alert('Deve redirecionar para a página de admin');
-            // this.router.navigate(['/admin']);
-          } else {
-            alert('Deve redirecionar para a página de funcionário');
-            // this.router.navigate(['/funcionario']);
-          }
-        },
-        error: (error) => {
-          console.log(JSON.stringify(error));
-          let msg: string = "Tente novamente em instantes.";
-          if (error['status'] == 401) {
-            msg = "Email/senha inválidos";
-          }
-          this.snackBar.open(msg, "Erro", { duration: 5000 })
-        },
+        next: (data) => this.doLogin(data),
+        error: (error) => this.errorLogin(error),
       })
   }
+
+  errorLogin(error): void {
+    let msg: string = "Tente novamente em instantes.";
+    if (error['status'] == 401) {
+      msg = "Email/senha inválidos";
+    }
+    this.snackBar.open(msg, "Erro", { duration: 5000 })
+  }
+
+  doLogin(data): void {
+    localStorage['token'] = data['data']['token'];
+    const usuarioData = JSON.parse(atob(data['data']['token'].split('.')[1]));
+
+    this.router.navigate([this.isAdmin(usuarioData) ? '/admin' : '/funcionario']);
+  }
+
+  isAdmin(usuarioData): boolean {
+    return usuarioData['role'] == 'ROLE_ADMIN';
+  }
+
 }
