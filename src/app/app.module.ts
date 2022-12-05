@@ -10,7 +10,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { CadastroPjModule, LoginModule, LoginRoutingModule } from './autenticacao';
 import { CadastroPfModule, CadastroPfRoutingModule } from './autenticacao/cadastro-pf';
 import { CadastroPjRoutingModule } from './autenticacao/cadastro-pj/cadastro-pj-routing.module';
-
+import { FuncionarioModule, FuncionarioRoutingModule } from './funcionario';
 /**
  * Módulo de routing raiz deve ser sempre o último na declaração no import
  */
@@ -20,17 +20,18 @@ import { CadastroPjRoutingModule } from './autenticacao/cadastro-pj/cadastro-pj-
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatIconModule,
 
     LoginModule,
-    LoginRoutingModule,
+    LoginRoutingModule, 
     CadastroPjModule,
     CadastroPjRoutingModule,
     CadastroPfModule,
     CadastroPfRoutingModule,
+    FuncionarioModule,
+    FuncionarioRoutingModule,
     
     AppRoutingModule
   ],
