@@ -30,10 +30,25 @@ export class LancamentoService {
   cadastrar(lancamento: Lancamento): Observable<any> {
     console.log(JSON.stringify(lancamento));
     return this.http.post(
-      env.baseApiUrl + this.PATH, 
-      lancamento, 
+      env.baseApiUrl + this.PATH,
+      lancamento,
       this.httpUtil.getHeaders()
     );
+  }
+
+  listarTodosLancamentos(): Observable<any> {
+    return this.http.get(env.baseApiUrl + this.PATH_TODOS_LANC.replace('{funcionarioId}',
+      this.httpUtil.obterIdUsuario()),
+      this.httpUtil.getHeaders()
+    );
+  }
+
+  listarLancamentosPorFuncionario(funcionarioId: string, pagina: number, ordem: string, direcao: string): Observable<any> {
+    const url: string = this.PATH + this.PATH_LANCAMENTOS.replace("{funcionarioId}", funcionarioId);
+
+    const params: string = `?pag=${pagina}&ord=${ordem}&dir=${direcao}`;
+
+    return this.http.get(url + params, this.httpUtil.getHeaders());
   }
 
 }
