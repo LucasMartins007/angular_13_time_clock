@@ -11,6 +11,8 @@ import { CadastroPjModule, LoginModule, LoginRoutingModule } from './autenticaca
 import { CadastroPfModule, CadastroPfRoutingModule } from './autenticacao/cadastro-pf';
 import { CadastroPjRoutingModule } from './autenticacao/cadastro-pj/cadastro-pj-routing.module';
 import { FuncionarioModule, FuncionarioRoutingModule } from './funcionario';
+import { AdminModule } from './admin';
+import { AdminRoutes, AdminRoutingModule } from './admin/components';
 /**
  * Módulo de routing raiz deve ser sempre o último na declaração no import
  */
@@ -32,6 +34,8 @@ import { FuncionarioModule, FuncionarioRoutingModule } from './funcionario';
     CadastroPfRoutingModule,
     FuncionarioModule,
     FuncionarioRoutingModule,
+    AdminModule,
+    AdminRoutingModule,
     
     AppRoutingModule
   ],
