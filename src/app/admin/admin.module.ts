@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
@@ -14,12 +15,14 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatDialogModule } from '@angular/material/dialog';
 
 import { RouterModule } from '@angular/router';
 
+import { FuncionarioService, HttpUtilService, LancamentoService, PtBrMatPaginatorIntl } from '../shared';
+import { ConfirmarDialog } from '../shared/components/alert-dialog-simple.component';
+import { SharedModule } from '../shared/shared.module';
 import { AdminComponent, AtualizacaoComponent, CadastroComponent, ListagemComponent } from './components';
-import { HttpUtilService, LancamentoService, PtBrMatPaginatorIntl } from '../shared';
+import { AdminGuard } from './services';
 
 
 @NgModule({
@@ -32,7 +35,8 @@ import { HttpUtilService, LancamentoService, PtBrMatPaginatorIntl } from '../sha
   imports: [
     CommonModule,
     RouterModule,
-
+    
+    ReactiveFormsModule, 
     FormsModule,
     MatInputModule,
     MatButtonModule,
@@ -43,18 +47,22 @@ import { HttpUtilService, LancamentoService, PtBrMatPaginatorIntl } from '../sha
     MatTableModule,
     MatSelectModule,
     MatRadioModule,
-    MatDatepickerModule,
+    MatDatepickerModule, 
     MatNativeDateModule,
-    MatDialogModule, 
+    MatDialogModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    SharedModule
   ],
   providers: [
     LancamentoService,
     HttpUtilService,
     MatPaginatorIntl,
+    FuncionarioService,
+    AdminGuard,
     { provide: MAT_DATE_LOCALE, useValue: 'pt-BR' },
     { provide: MatPaginatorIntl, useClass: PtBrMatPaginatorIntl }
-  ]
+  ],
+  entryComponents: [ ConfirmarDialog ]
 })
 export class AdminModule { }
