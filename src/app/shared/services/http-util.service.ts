@@ -18,17 +18,27 @@ export class HttpUtilService {
   }
 
   obterIdUsuario(): string {
-    if (!localStorage['token']) {
-      return '';
-    }
     const dadosUsuario = this.obterDadosUsuario();
+    
     return dadosUsuario ? dadosUsuario.id : '';
+  }
+  
+  obterIdEmpresa(): string {
+    const dadosUsuario = this.obterDadosUsuario();
+
+    return dadosUsuario ? dadosUsuario.empresaId : '';
   }
 
   obterDadosUsuario() {
     if (!localStorage['token']) {
-      return '';
+      return null;
     }
     return JSON.parse(atob(localStorage['token'].split('.')[1]));
+  }
+
+  obterPerfil() {
+    const dadosUsuario = this.obterDadosUsuario();
+    
+    return dadosUsuario ? dadosUsuario.role : '';
   }
 }

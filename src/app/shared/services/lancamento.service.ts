@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { environment as env } from 'src/environments/enviroment';
 import { Lancamento } from '../models';
 
@@ -44,11 +45,24 @@ export class LancamentoService {
   }
 
   listarLancamentosPorFuncionario(funcionarioId: string, pagina: number, ordem: string, direcao: string): Observable<any> {
-    const url: string = this.PATH + this.PATH_LANCAMENTOS.replace("{funcionarioId}", funcionarioId);
+    const url: string = env.baseApiUrl + this.PATH_LANCAMENTOS.replace("{funcionarioId}", funcionarioId);
 
     const params: string = `?pag=${pagina}&ord=${ordem}&dir=${direcao}`;
 
     return this.http.get(url + params, this.httpUtil.getHeaders());
+  }
+
+  remover(lancamentoId: string): Observable<any> {
+    return this.http.delete(env.baseApiUrl + this.PATH + "/" + lancamentoId,
+      this.httpUtil.getHeaders());
+  }
+
+  buscarPorId(lancamentoId: string): Observable<any> {
+    return this.http.get(env.baseApiUrl + this.PATH + '/' + lancamentoId, this.httpUtil.getHeaders());
+  }
+
+  atualizar(lancamento: Lancamento): Observable<any> {
+    return this.http.put(env.baseApiUrl + this.PATH + '/' + lancamento.id, lancamento, this.httpUtil.getHeaders());
   }
 
 }
