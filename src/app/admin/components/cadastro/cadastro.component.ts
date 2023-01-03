@@ -38,6 +38,7 @@ export class CadastroComponent implements OnInit {
   }
 
   gerarForm(): void {
+
     this.form = this.fb.group({
       data: ['', [Validators.required]],
       tipo: ['', [Validators.required]],
@@ -79,7 +80,7 @@ export class CadastroComponent implements OnInit {
           this.snackBar.open(msg, "Erro", { duration: 5000 });
         }
       })
-  }
+  } 
 
   obterLancamento(dados: any): Lancamento {
     const data = moment(dados.data);

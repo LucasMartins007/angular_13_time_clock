@@ -23,9 +23,7 @@ export class LancamentoService {
   ) { }
 
   buscarUltimoTipoLancado(): Observable<any> {
-    return this.http.get(env.baseApiUrl + this.PATH_ULTIMO_LANC.replace('{funcionarioId}', this.httpUtil.obterIdUsuario()),
-      this.httpUtil.getHeaders()
-    );
+    return this.http.get(env.baseApiUrl + this.PATH_ULTIMO_LANC.replace('{funcionarioId}', this.httpUtil.obterIdUsuario()));
   }
 
   cadastrar(lancamento: Lancamento): Observable<any> {
@@ -33,14 +31,12 @@ export class LancamentoService {
     return this.http.post(
       env.baseApiUrl + this.PATH,
       lancamento,
-      this.httpUtil.getHeaders()
     );
   }
 
   listarTodosLancamentos(): Observable<any> {
     return this.http.get(env.baseApiUrl + this.PATH_TODOS_LANC.replace('{funcionarioId}',
-      this.httpUtil.obterIdUsuario()),
-      this.httpUtil.getHeaders()
+      this.httpUtil.obterIdUsuario())
     );
   }
 
@@ -49,20 +45,19 @@ export class LancamentoService {
 
     const params: string = `?pag=${pagina}&ord=${ordem}&dir=${direcao}`;
 
-    return this.http.get(url + params, this.httpUtil.getHeaders());
+    return this.http.get(url + params);
   }
 
   remover(lancamentoId: string): Observable<any> {
-    return this.http.delete(env.baseApiUrl + this.PATH + "/" + lancamentoId,
-      this.httpUtil.getHeaders());
+    return this.http.delete(env.baseApiUrl + this.PATH + "/" + lancamentoId);
   }
 
   buscarPorId(lancamentoId: string): Observable<any> {
-    return this.http.get(env.baseApiUrl + this.PATH + '/' + lancamentoId, this.httpUtil.getHeaders());
+    return this.http.get(env.baseApiUrl + this.PATH + '/' + lancamentoId);
   }
 
   atualizar(lancamento: Lancamento): Observable<any> {
-    return this.http.put(env.baseApiUrl + this.PATH + '/' + lancamento.id, lancamento, this.httpUtil.getHeaders());
+    return this.http.put(env.baseApiUrl + this.PATH + '/' + lancamento.id, lancamento);
   }
 
 }

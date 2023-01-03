@@ -8,15 +8,6 @@ export class HttpUtilService {
 
   constructor() { }
 
-  getHeaders() {
-    let httpHeaders: HttpHeaders = new HttpHeaders();
-
-    if (localStorage['token']) {
-      httpHeaders = httpHeaders.set('Authorization', 'Bearer ' + localStorage['token']);
-    }
-    return { headers: httpHeaders };
-  }
-
   obterIdUsuario(): string {
     const dadosUsuario = this.obterDadosUsuario();
     

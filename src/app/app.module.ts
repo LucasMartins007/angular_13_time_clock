@@ -13,6 +13,8 @@ import { CadastroPjRoutingModule } from './autenticacao/cadastro-pj/cadastro-pj-
 import { FuncionarioModule, FuncionarioRoutingModule } from './funcionario';
 import { AdminModule } from './admin';
 import { AdminRoutes, AdminRoutingModule } from './admin/components';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 /**
  * Módulo de routing raiz deve ser sempre o último na declaração no import
  */
@@ -27,7 +29,7 @@ import { AdminRoutes, AdminRoutingModule } from './admin/components';
     MatIconModule,
 
     LoginModule,
-    LoginRoutingModule, 
+    LoginRoutingModule,
     CadastroPjModule,
     CadastroPjRoutingModule,
     CadastroPfModule,
@@ -36,10 +38,16 @@ import { AdminRoutes, AdminRoutingModule } from './admin/components';
     FuncionarioRoutingModule,
     AdminModule,
     AdminRoutingModule,
-    
+
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

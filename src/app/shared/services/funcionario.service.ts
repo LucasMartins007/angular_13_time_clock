@@ -20,7 +20,6 @@ export class FuncionarioService {
   ) { }
 
   listarFuncionariosPorEmpresa(): Observable<any> {
-    return this.http.get(env.baseApiUrl + this.PATH_FUNC_POR_EMPRESA.replace('{empresaId}', this.httpUtil.obterIdEmpresa()),
-      this.httpUtil.getHeaders());
+    return this.http.get(env.baseApiUrl + this.PATH_FUNC_POR_EMPRESA.replace('{empresaId}', this.httpUtil.obterIdEmpresa()));
   }
 }
